@@ -89,6 +89,38 @@ def identities(url, metadata, at)
   end
 end
 
+def super_of_list(url, metadata, at)
+  storages = ScaleRb::HttpClient.get_storage3(
+    url, metadata, 'identity', 'super_of',
+    at: at
+  )
+  storages.each_with_object({}) do |storage, acc|
+    account_id = "0x#{storage[:storage_key][-64..]}"
+    acc[account_id] = storage[:storage]
+  end
+end
+
+def identity_display_name(account_id, identities)
+  identity = identities[account_id]
+
+  display_name_code = identity&.[](:info)&.[](:display)&.values&.first
+  display_name_code&.to_bytes&.to_utf8
+end
+
+def display_name_of(account_id, identities, super_of_list)
+  self_name = identity_display_name(account_id, identities)
+  return self_name if self_name
+
+  super_of = super_of_list[account_id]
+  return if super_of.nil?
+
+  # `super_of` example:
+  #   ["0x86f68361d0a346a62be267558e72dfb9e3b5a04adcc2c9e46fb7b9482f7c876f", {:Raw9=>"0x626572796c6c69756d"}]
+  self_name = super_of[1]&.values&.first&.to_bytes&.to_utf8
+  super_name = identity_display_name(super_of[0], identities)
+  "#{super_name}/#{self_name}"
+end
+
 def main
   # url = 'https://polkadot-rpc.dwellir.com'
   url = 'https://dot-rpc.stakeworld.io'
@@ -108,10 +140,8 @@ def main
   puts "active validators count: #{exposures.length}"
 
   slashed_list = slashed_list(url, metadata, at)
-  puts "slashed count: #{slashed_list.length}"
-
   identities = identities(url, metadata, at)
-  puts "identities count: #{identities.length}"
+  super_of_list = super_of_list(url, metadata, at)
 
   result = validators.delete_if do |validator|
     account_id = validator[:account_id]
@@ -129,13 +159,12 @@ def main
   end
 
   result = result.map do |validator|
-    identity = identities[validator[:account_id]]
-    display_name_code = identity&.[](:info)&.[](:display)&.values&.first
-    validator[:display_name] = display_name_code&.to_bytes&.to_utf8
+    validator[:display_name] =
+      display_name_of(validator[:account_id], identities, super_of_list)
     validator
   end
 
-  puts "result count: #{result.length}\n"
+  puts "result count: #{result.length}\n\n"
   result = result.sort { |a, b| a[:commission] <=> b[:commission] }
   result.each do |validator|
     puts '{'
