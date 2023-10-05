@@ -1,0 +1,194 @@
+[
+  {
+    "display_name": "Tesla",
+    "commission": 1,
+    "address": "15tfUt4iQNjMyhZiJGBf4EpETE2KqtW1nfJwbBT1MvWjvcK9",
+    "account_id": "0xd857fcac7bd9bb03551d70b9743895a98b74b06e54bdc34f1b27ab240356857d"
+  },
+  {
+    "display_name": "Stampede",
+    "commission": 8000000,
+    "address": "16ccn3xe5tAeR8kvzCRTcqHZjMJHvuF2pnLfTqyF1EmMusCU",
+    "account_id": "0xf857311106c8d7b0daf6e096db9a0d759b52403e439ab23fd6559780a8b1c803"
+  },
+  {
+    "display_name": "AncibanciDOT",
+    "commission": 9000000,
+    "address": "11AnciffJctDC28odTEjDVYP2yWyp6275WLbrAUHi2vJm9f",
+    "account_id": "0x0020f1b8ed9726e2781f24a87cd41e31e7ced50351422403e70facbd1b5e562f"
+  },
+  {
+    "display_name": "Joe/V01",
+    "commission": 19000000,
+    "address": "126RwaHn4MDekLWfUYfiqcVbiQHapwDSAT9vZZS15HLqfDJh",
+    "account_id": "0x30606b4c1b89b4e562efafe76bec80154ac8b3e16e04c2e0f619bcdc0a5eef52"
+  },
+  {
+    "display_name": "COSMOTRON",
+    "commission": 25000000,
+    "address": "16KjnbCmBXqT3R956sHak7THsgQZ9Ek8ibnG1sFyCNtfJ8y",
+    "account_id": "0x040f4dbfe9b3333f7faf9304bf2ba9af0b4f850bab4e716759e0ebc8c4703c8c"
+  },
+  {
+    "display_name": "Masternode24🔱//24",
+    "commission": 30000000,
+    "address": "14Q74NU7dG4uxiHTSCSZii5T1Y368cm7BNVNeRWmEuoDUGXQ",
+    "account_id": "0x9653bcf18e30531092fdc1c52afe06cf61f56fb1fa5d719078cd6914d395ed0f"
+  },
+  {
+    "display_name": "Amforc/1",
+    "commission": 30000000,
+    "address": "1y6CPLgccsysCEii3M7jQF834GZsz9A3HMcZz3w7RjGPpBL",
+    "account_id": "0x2ac73c24bb740376a5b0f44814e8ce8b34f23be0650e99b7ac81e1159f9c3151"
+  },
+  {
+    "display_name": "Stakeflow",
+    "commission": 30000000,
+    "address": "13K6QTYBPMUFTbhZzqToKcfCiWbt4wDPHr3rUPyUessiPR61",
+    "account_id": "0x664513c046d4497ba05c19efac47cb0dbe498e20b089dff25aa08d1a77ec970b"
+  },
+  {
+    "display_name": "🛡 DWELLIR DOT 🛡",
+    "commission": 30000000,
+    "address": "1MrurrNb4VTrRJUXT6fGxHFdmwwscqHZUFkMistMsP8k5Nk",
+    "account_id": "0x0fe8ecbba7a1e216bd1c3bb7e749a98fcae77b4185c5522cbad8e826d0d92371"
+  },
+  {
+    "display_name": "♞GameTheory♜",
+    "commission": 30000000,
+    "address": "13Srw7dVtGJnZrV3o6RCAJ97MaGbSKShQQiSYjbGp4Jvu4Cs",
+    "account_id": "0x6c31b105bf4566e9837d11fc54b523f7b3ec8993f8c880b1e0c283d7bcd0aa53"
+  },
+  {
+    "display_name": "P2P.ORG/5",
+    "commission": 45000000,
+    "address": "15oKi7HoBQbwwdQc47k71q4sJJWnu5opn1pqoGx4NAEYZSHs",
+    "account_id": "0xd44533a4d21fd9d6f5d57c8cd05c61a6f23f9131cec8ae386b6b437db399ec3d"
+  },
+  {
+    "display_name": "P2P.ORG/12",
+    "commission": 45000000,
+    "address": "14AkAFBzukRhAFh1wyko1ZoNWnUyq7bY1XbjeTeCHimCzPU1",
+    "account_id": "0x8c23324b0cb29e4fd1a68cb08febe58b50e39d8afdb5f752d6c26c8ba52fc002"
+  },
+  {
+    "display_name": "General-Beck/Laniakea",
+    "commission": 50000000,
+    "address": "15MUBwP6dyVw5CXF9PjSSv7SdXQuDSwjX86v1kBodCSWVR7c",
+    "account_id": "0xc08d5de7a5d97bea2c7ddf516d0635bddc43f326ae2f80e2595b49d4a08c4619"
+  },
+  {
+    "display_name": "CP287-CLOUDWALK",
+    "commission": 50000000,
+    "address": "16GDRhRYxk42paoK6TfHAqWej8PdDDUwdDazjv4bAn4KGNeb",
+    "account_id": "0xe8c7ad65c15fa3ba64424a61b177382a0c5468135aecca9ca454f5e7ce4d305b"
+  },
+  {
+    "display_name": "😻 Stake Kat 😻",
+    "commission": 50000000,
+    "address": "155LwjGpJH3xYJwPBr6aapk2WCCAezVftvSMrqeJA6eE7v2d",
+    "account_id": "0xb4410d33f13c053dca87be657a0ae3cc87655baf43f7efdd454ff74e3a9d8a2f"
+  },
+  {
+    "display_name": "Legos/X",
+    "commission": 50000000,
+    "address": "1PhQxnCXTCfDVBw3Ttbxa6DZJujV3YNFYpi4mFfLHyGWXD9",
+    "account_id": "0x114f710e9094d174ee537a86a7eb9ab2004e6405626a843d4ffea72694b9e23e"
+  },
+  {
+    "display_name": "BESTVALIDATOR | ZURICH/p1",
+    "commission": 50000000,
+    "address": "1123RekaPHgWaPL5v9qfsikRemeZdYC4tvKXYuLXwhfT3NKy",
+    "account_id": "0x00cb68a2c03e666f346a277036e8f27c912baee3c7b41c5c19123840f3a8e8fc"
+  },
+  {
+    "display_name": "hsinchu",
+    "commission": 50000000,
+    "address": "16SDUqoRr6f8DAyKhYWvo9dwFPdJHeFXFr1may1vhomqqPTQ",
+    "account_id": "0xf068505a66e272d987c377f0ae0c0a795edbb4db40be62187205803920118a28"
+  },
+  {
+    "display_name": "🌐 decentraDOT.com 🌐",
+    "commission": 50000000,
+    "address": "15wznkm7fMaJLFaw7B8KrJWkNcWsDziyTKVjrpPhRLMyXsr5",
+    "account_id": "0xdae2b867564f01654946a095e69f0f49df1eb5c0efce5730cc3d1d83da3f4b09"
+  },
+  {
+    "display_name": "il4r141",
+    "commission": 50000000,
+    "address": "12rgiL4r56kPE4PuYmz8snR21isfbrcp5Vbf8VdJe2AWDuus",
+    "account_id": "0x5220f15324663f1bb0bad6212a344c7f4deb40aa6e3f489a56db71d545507e19"
+  },
+  {
+    "display_name": "Green Cloud",
+    "commission": 50000000,
+    "address": "1HtWJy6zTTc6Y1hyRTVpM6MDCpiWknsjDssUPC3FTKjfAGs",
+    "account_id": "0x0ce14f14486f3fb3513a44a19970a0bbf4da8b642c9837cfa251b33384dec257"
+  },
+  {
+    "display_name": "❄❄❄️/❄❄❄️",
+    "commission": 50000000,
+    "address": "12ZNJzjPBZUh8VV5cuJFkbbwMttFNkH39EhoeYcgGHsJd4MG",
+    "account_id": "0x44ebd2b934606a30469bfd509293c34174336f974709964a18bf40d99a0bed0d"
+  },
+  {
+    "display_name": "ParaNodes.io/01🚀",
+    "commission": 50000000,
+    "address": "14hM4oLJCK6wtS7gNfwTDhthRjy5QJ1t3NAcoPjEepo9AH67",
+    "account_id": "0xa37a1021f6eab9a2658f2f6a5e08f5851de80230d270662dfe648c0c7bec2e46"
+  },
+  {
+    "display_name": "Robinhood",
+    "commission": 50000000,
+    "address": "14Bf4m5CTNrtGcgCAp6xsXMgA9pPeoiVT54g3C2qY1zNvgsR",
+    "account_id": "0x8cd54ac24629880ed1f3e6c8d5858ea08b5a7fbaa2c210c79e04223f3f05f35a"
+  },
+  {
+    "display_name": "Polkadot.pro - Realgar/LUCKY",
+    "commission": 50000000,
+    "address": "1LUckyocmz9YzeQZHVpBvYYRGXb3rnSm2tvfz79h3G3JDgP",
+    "account_id": "0x0edaa0d08e8b21d6e8f946eff381ad4be29aa63569a54a6a75c91b878b463033"
+  },
+  {
+    "display_name": "CryptoLab 01",
+    "commission": 50000000,
+    "address": "16iiKwFsRKRsjAiEpD4zgNgEX84nzHtHHNFKXhz1sHtan3ne",
+    "account_id": "0xfcfd589d8df6da23f65a51de867fac9490ead3ffbb36ce8d1946cec1789a9a46"
+  },
+  {
+    "display_name": "Uno Staking",
+    "commission": 50000000,
+    "address": "1cFsLn7o74nmjbRyDtMAnMpQMc5ZLsjgCSz9Np2mcejUK83",
+    "account_id": "0x1ae3a39de384cc366c0c0693e82a9b38397a35b201ffc33e383469df052e4227"
+  },
+  {
+    "display_name": "Side",
+    "commission": 50000000,
+    "address": "12eVBx2xjVFzHyyGVHCqEQMp2yntKiSzE2JuGYM1kQAjVKzu",
+    "account_id": "0x48d3348d85e6e65def6ce7fdf16f9a8e7c7e3290ee2fe99ffb568a1ad86e1676"
+  },
+  {
+    "display_name": "P2P STAKING/01",
+    "commission": 50000000,
+    "address": "13S541dQ5NXFCxSBqFUFghkCfUU6LsZUVem7z2tfvsJwWFys",
+    "account_id": "0x6b973df13cf0190a75f17633f8a391020df8bac9aa9e4c50670e0dad135bf726"
+  },
+  {
+    "display_name": "🔒stateless_money🔒/1",
+    "commission": 50000000,
+    "address": "14Vh8S1DzzycngbAB9vqEgPFR9JpSvmF1ezihTUES1EaHAV",
+    "account_id": "0x02aa5256d804b33717f1d338eef9901e89682b80c81e3b1138a02079e0848aa0"
+  },
+  {
+    "display_name": "Merkletribe/BAYAKA",
+    "commission": 50000000,
+    "address": "1cJNyZCPxpf1UPPt8ckHsiN8N77ykMK9kmamrFY2rE6d77F",
+    "account_id": "0x1aec17785fa10a655d77b8850a0b7c5ac3ce5c0389555ec7d8f303092552cea7"
+  },
+  {
+    "display_name": "Xalamus",
+    "commission": 50000000,
+    "address": "16XxKGBRWSCQZwrpgcnzE1HqcYC3xJBcSJrM1pRazfmuSrio",
+    "account_id": "0xf4c8bc5da2f0d0e2f6e040005f783c023b85a8cb21df5c1f509c144fe1887202"
+  }
+]

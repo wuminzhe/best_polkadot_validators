@@ -19,8 +19,8 @@ end
 
 def unhealthy_commission?(validator)
   commission = validator[:commission]
-  commission == 0 || commission > 50_000_000
-  # commission > 50_000_000
+  # commission == 0 || commission > 50_000_000
+  commission > 50_000_000
 end
 
 def unhealthy_own_stake?(exposure)
@@ -121,13 +121,27 @@ def display_name_of(account_id, identities, super_of_list)
   "#{super_name}/#{self_name}"
 end
 
+def add_display_name(validator, identities, super_of_list)
+  validator[:display_name] =
+    display_name_of(validator[:account_id], identities, super_of_list)
+  validator
+end
+
+def add_address(validator)
+  validator[:address] = Address.encode(validator[:account_id], 0)
+  validator
+end
+
+def slashed_before?(validator, slashed_list)
+  slashed_list[validator[:account_id]] == true
+end
+
 def main
   # url = 'https://polkadot-rpc.dwellir.com'
   url = 'https://dot-rpc.stakeworld.io'
 
   at = ScaleRb::HttpClient.chain_getFinalizedHead(url)
   puts "head: #{at}"
-
   metadata = ScaleRb::HttpClient.get_metadata_cached(url, at: at, dir: './metadata')
 
   era_index = ScaleRb::HttpClient.get_storage3(url, metadata, 'staking', 'active_era', at: at)[:index]
@@ -140,39 +154,32 @@ def main
   puts "active validators count: #{exposures.length}"
 
   slashed_list = slashed_list(url, metadata, at)
-  identities = identities(url, metadata, at)
-  super_of_list = super_of_list(url, metadata, at)
 
+  # apply filter
   result = validators.delete_if do |validator|
     account_id = validator[:account_id]
 
-    blocked_nominations?(validator) ||
+    exposures[account_id].nil? || # not active
+      blocked_nominations?(validator) ||
       unhealthy_commission?(validator) ||
-      (
-        exposure = exposures[account_id]
-        exposure.nil? || over_subscribed?(exposure) || unhealthy_own_stake?(exposure)
-      ) ||
-      (
-        slashed = slashed_list[account_id]
-        slashed && slashed == true
-      )
+      over_subscribed?(exposures[account_id]) ||
+      unhealthy_own_stake?(exposures[account_id]) ||
+      slashed_before?(validator, slashed_list)
   end
 
-  result = result.map do |validator|
-    validator[:display_name] =
-      display_name_of(validator[:account_id], identities, super_of_list)
-    validator
-  end
+  # add display name and address
+  puts "result count: #{result.length}"
+  identities = identities(url, metadata, at)
+  super_of_list = super_of_list(url, metadata, at)
+  result = result.map { |validator| add_display_name(validator, identities, super_of_list) }
+                 .map { |validator| add_address(validator) }
+                 .map { |validator| validator.slice(:display_name, :commission, :address, :account_id) }
+                 .sort { |a, b| a[:commission] <=> b[:commission] }
 
-  puts "result count: #{result.length}\n\n"
-  result = result.sort { |a, b| a[:commission] <=> b[:commission] }
-  result.each do |validator|
-    puts '{'
-    puts "  name: #{validator[:display_name]}"
-    puts "  address: #{Address.encode(validator[:account_id], 0)}"
-    puts "  account_id: #{validator[:account_id]}"
-    puts "  commission: #{validator[:commission]}"
-    puts '}'
+  # save result to file
+  filename = "./result/#{Time.now.strftime('%Y%M%d')}-#{at}.json"
+  File.open(filename, 'w') do |f|
+    f.write(JSON.pretty_generate(result))
   end
 end
 
