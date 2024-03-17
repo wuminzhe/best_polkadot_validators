@@ -12,12 +12,6 @@
     "account_id": "0xf857311106c8d7b0daf6e096db9a0d759b52403e439ab23fd6559780a8b1c803"
   },
   {
-    "display_name": "AncibanciDOT",
-    "commission": 9000000,
-    "address": "11AnciffJctDC28odTEjDVYP2yWyp6275WLbrAUHi2vJm9f",
-    "account_id": "0x0020f1b8ed9726e2781f24a87cd41e31e7ced50351422403e70facbd1b5e562f"
-  },
-  {
     "display_name": "Joe/V01",
     "commission": 19000000,
     "address": "126RwaHn4MDekLWfUYfiqcVbiQHapwDSAT9vZZS15HLqfDJh",
@@ -70,6 +64,18 @@
     "commission": 45000000,
     "address": "14AkAFBzukRhAFh1wyko1ZoNWnUyq7bY1XbjeTeCHimCzPU1",
     "account_id": "0x8c23324b0cb29e4fd1a68cb08febe58b50e39d8afdb5f752d6c26c8ba52fc002"
+  },
+  {
+    "display_name": "Merkletribe/BAYAKA",
+    "commission": 50000000,
+    "address": "1cJNyZCPxpf1UPPt8ckHsiN8N77ykMK9kmamrFY2rE6d77F",
+    "account_id": "0x1aec17785fa10a655d77b8850a0b7c5ac3ce5c0389555ec7d8f303092552cea7"
+  },
+  {
+    "display_name": "Xalamus",
+    "commission": 50000000,
+    "address": "16XxKGBRWSCQZwrpgcnzE1HqcYC3xJBcSJrM1pRazfmuSrio",
+    "account_id": "0xf4c8bc5da2f0d0e2f6e040005f783c023b85a8cb21df5c1f509c144fe1887202"
   },
   {
     "display_name": "General-Beck/Laniakea",
@@ -150,6 +156,12 @@
     "account_id": "0x0edaa0d08e8b21d6e8f946eff381ad4be29aa63569a54a6a75c91b878b463033"
   },
   {
+    "display_name": "AncibanciDOT",
+    "commission": 50000000,
+    "address": "11AnciffJctDC28odTEjDVYP2yWyp6275WLbrAUHi2vJm9f",
+    "account_id": "0x0020f1b8ed9726e2781f24a87cd41e31e7ced50351422403e70facbd1b5e562f"
+  },
+  {
     "display_name": "CryptoLab 01",
     "commission": 50000000,
     "address": "16iiKwFsRKRsjAiEpD4zgNgEX84nzHtHHNFKXhz1sHtan3ne",
@@ -178,17 +190,5 @@
     "commission": 50000000,
     "address": "14Vh8S1DzzycngbAB9vqEgPFR9JpSvmF1ezihTUES1EaHAV",
     "account_id": "0x02aa5256d804b33717f1d338eef9901e89682b80c81e3b1138a02079e0848aa0"
-  },
-  {
-    "display_name": "Merkletribe/BAYAKA",
-    "commission": 50000000,
-    "address": "1cJNyZCPxpf1UPPt8ckHsiN8N77ykMK9kmamrFY2rE6d77F",
-    "account_id": "0x1aec17785fa10a655d77b8850a0b7c5ac3ce5c0389555ec7d8f303092552cea7"
-  },
-  {
-    "display_name": "Xalamus",
-    "commission": 50000000,
-    "address": "16XxKGBRWSCQZwrpgcnzE1HqcYC3xJBcSJrM1pRazfmuSrio",
-    "account_id": "0xf4c8bc5da2f0d0e2f6e040005f783c023b85a8cb21df5c1f509c144fe1887202"
   }
 ]
