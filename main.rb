@@ -1,11 +1,15 @@
 require 'scale_rb'
 require 'logger'
 
+def println(title, value, width = 23, pad_char = ' ')
+  formatted_title = title.rjust(width, pad_char)
+  puts "#{formatted_title}: #{value}"
+end
+
 # ScaleRb.logger.level = Logger::DEBUG
 
-def validators(url, at = nil)
-  # TODO: scale_rb: remove metadata
-  items = ScaleRb::HttpClient.get_storage3(url, 'staking', 'validators', at: at)
+def validators(client, at, metadata)
+  items = client.get_storage('Staking', 'Validators', block_hash: at, metadata:)
 
   items.map do |item|
     {
@@ -20,28 +24,15 @@ end
 #   account_id: storage,
 #   ...
 # }
-def get_exposures(url, era_index, at)
+def get_exposures(client, era_index, at, metadata)
   # [
   #   {
   #     storage_key: "0x...",
-  #     storage: {
-  #       :total=>24562033284196687,
-  #       :own=>50003254094151,
-  #       :others=>[
-  #         {:who=>"0xc0a4491a8414abdab62f35f94dd43e318a72802ffb203e86df1dd6bcdc9b9458", :value=>12364417353224},
-  #         {:who=>"0x4e971e23c90ddb297e075629324720fcd556a20ce6c38bb1cafc38e048c36992", :value=>6600000000000},
-  #         {:who=>"0xf2838189b9033632facd4a593ddb4cbb9fcc6eeb82b5c9ceacee56791f10f92c", :value=>5902280178930},
-  #         {:who=>"0x83bf40ac1231b8b9b539abead87569ae512edd874c710cd249afecab1093cf03", :value=>24487163332570382}
-  #       ]
-  #     }
+  #     storage: {:total=>29668407726230783, :own=>10000000000000, :nominator_count=>183, :page_count=>1}
   #   },
   #   ...
   # ]
-  storages = ScaleRb::HttpClient.get_storage3(
-    url, 'staking', 'eras_stakers',
-    key_part1: era_index.to_s, # TODO: scale_rb: to_s
-    at: at
-  )
+  storages = client.get_storage('Staking', 'ErasStakersOverview', [era_index], block_hash: at, metadata:) 
 
   storages.each_with_object({}) do |storage, acc|
     account_id = "0x#{storage[:storage_key][-64..]}"
@@ -49,11 +40,8 @@ def get_exposures(url, era_index, at)
   end
 end
 
-def slashed_list(url, at)
-  slashes = ScaleRb::HttpClient.get_storage3(
-    url, 'staking', 'slashing_spans',
-    at: at
-  )
+def slashed_list(client, at, metadata)
+  slashes = client.get_storage('Staking', 'SlashingSpans', block_hash: at, metadata:)
 
   slashes.each_with_object({}) do |storage, acc|
     account_id = "0x#{storage[:storage_key][-64..]}"
@@ -61,22 +49,19 @@ def slashed_list(url, at)
   end
 end
 
-def identities(url, at)
-  storages = ScaleRb::HttpClient.get_storage3(
-    url, 'identity', 'identity_of',
-    at: at
-  )
+def get_identities(client, at, metadata)
+  at = client.chain_getFinalizedHead
+  storages = client.get_storage('Identity', 'IdentityOf', block_hash: at, metadata:)
+
   storages.each_with_object({}) do |storage, acc|
     account_id = "0x#{storage[:storage_key][-64..]}"
     acc[account_id] = storage[:storage]
   end
 end
 
-def super_of_list(url, at)
-  storages = ScaleRb::HttpClient.get_storage3(
-    url, 'identity', 'super_of',
-    at: at
-  )
+def super_of_list(client, at, metadata)
+  storages = client.get_storage('Identity', 'SuperOf', block_hash: at, metadata:)
+
   storages.each_with_object({}) do |storage, acc|
     account_id = "0x#{storage[:storage_key][-64..]}"
     acc[account_id] = storage[:storage]
@@ -84,9 +69,10 @@ def super_of_list(url, at)
 end
 
 def identity_display_name(account_id, identities)
+  # [{:judgements=>[[0, "Reasonable"]], :deposit=>2008200000, :info=>{:display=>{:Raw11=>"0x5a7567204361706974616c"}, :legal=>"None", :web=>{:Raw22=>"0x68747470733a2f2f7a75676361706974616c2e636f6d"}, :matrix=>"None", :email=>{:Raw22=>"0x636f6e74616374407a75676361706974616c2e636f6d"}, :pgp_fingerprint=>"None", :image=>"None", :twitter=>"None", :github=>"None", :discord=>"None"}}, "None"
   identity = identities[account_id]
 
-  display_name_code = identity&.[](:info)&.[](:display)&.values&.first
+  display_name_code = identity&.first&.[](:info)&.[](:display)&.values&.first # "0x5a7567204361706974616c"
   display_name_code&._to_bytes&._to_utf8
 end
 
@@ -94,12 +80,10 @@ def display_name_of(account_id, identities, super_of_list)
   self_name = identity_display_name(account_id, identities)
   return self_name if self_name
 
+  # ["0x86f68361d0a346a62be267558e72dfb9e3b5a04adcc2c9e46fb7b9482f7c876f", {:Raw9=>"0x626572796c6c69756d"}]
   super_of = super_of_list[account_id]
   return if super_of.nil?
 
-  # `super_of` example:
-  #   ["0x86f68361d0a346a62be267558e72dfb9e3b5a04adcc2c9e46fb7b9482f7c876f", {:Raw9=>"0x626572796c6c69756d"}]
-  p super_of
   self_name = if super_of[1] == 'None'
                 'None'
               else
@@ -137,7 +121,7 @@ def unhealthy_own_stake?(exposure)
 end
 
 def over_subscribed?(exposure)
-  nominator_count = exposure[:others].length
+  nominator_count = exposure[:nominator_count]
   nominator_count >= 220 # not 256
 end
 
@@ -146,22 +130,26 @@ def slashed_before?(validator, slashed_list)
 end
 
 def main
-  # url = 'https://polkadot-rpc.dwellir.com'
-  url = 'https://dot-rpc.stakeworld.io'
+  url = 'https://polkadot-rpc.dwellir.com'
+  # url = 'https://dot-rpc.stakeworld.io'
 
-  at = ScaleRb::HttpClient.chain_getFinalizedHead(url)
-  puts "head: #{at}"
+  client = ScaleRb::HttpClient.new(url)
 
-  era_index = ScaleRb::HttpClient.get_storage3(url, 'staking', 'active_era', at: at)[:index]
-  puts "era: #{era_index}"
+  at = client.chain_getFinalizedHead
+  println "head", at
 
-  validators = validators(url, at)
-  puts "total validators count: #{validators.length}"
+  metadata = client.get_metadata(at)
 
-  exposures = get_exposures(url, era_index, at)
-  puts "active validators count: #{exposures.length}"
+  era = client.get_storage('Staking', 'CurrentEra', block_hash: at, metadata:)
+  println 'era', era.inspect
 
-  slashed_list = slashed_list(url, at)
+  validators = validators(client, at, metadata)
+  println "total validators count", validators.length
+
+  exposures = get_exposures(client, era, at, metadata)
+  println "active validators count", exposures.length
+
+  slashed_list = slashed_list(client, at, metadata)
 
   # apply filter
   result = validators.delete_if do |validator|
@@ -176,9 +164,15 @@ def main
   end
 
   # add display name and address
-  puts "result count: #{result.length}"
-  identities = identities(url, at)
-  super_of_list = super_of_list(url, at)
+  println "result count", result.length
+  
+  people_client = ScaleRb::HttpClient.new('https://polkadot-people-rpc.polkadot.io')
+  people_at = people_client.chain_getFinalizedHead
+  people_metadata = people_client.get_metadata(people_at)
+
+  identities = get_identities(people_client, people_at, people_metadata)
+  super_of_list = super_of_list(people_client, people_at, people_metadata)
+
   result = result.map { |validator| add_display_name(validator, identities, super_of_list) }
                  .map { |validator| add_address(validator) }
                  .map { |validator| validator.slice(:display_name, :commission, :address, :account_id) }
